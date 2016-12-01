@@ -37,14 +37,29 @@ keycapp.ui.builder = (function() {
 		return outputElt;
 	}
 	
+	function buildDescription() {
+		var shortDescriptionElt = document.createElement("div");
+		shortDescriptionElt.innerHTML = "Format d'affichage (avec touches de combinaisons = Alt, Maj ou Ctrl) : ";
+		
+		var formatElt = document.createElement("div");
+		formatElt.style.fontFamily = "courier";
+		formatElt.innerHTML = "> touche = code [touches de combinaisons]";
+		formatElt.style.marginTop = "1em";
+		formatElt.style.marginBottom = "1em";
+			
+		var descriptionElt = document.createElement("div");
+		descriptionElt.appendChild(shortDescriptionElt);
+		descriptionElt.appendChild(formatElt);
+		
+		return descriptionElt;
+	}
+	
 	return {
 		buildDomElement: function() {
 			var appUiContainer = document.createElement("div");
 			appUiContainer.appendChild(buildTitle());
+			appUiContainer.appendChild(buildDescription());
 			appUiContainer.appendChild(buildOutput());
-//			appUiContainer.appendChild(buildChronoDisplay());
-//			appUiContainer.appendChild(buildDescription());
-//			appUiContainer.appendChild(buildButtonsMenu());
 			
 			return appUiContainer;
 		},
