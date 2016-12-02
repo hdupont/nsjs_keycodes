@@ -1,23 +1,22 @@
 keycapp.ui = (function() {
 	
-	var _keyPressedOutput = null;
+	var _output = null;
 	
 	function appendUi(appNode, appUiContainer) {
 		appNode.innerHTML = appUiContainer.innerHTML;
 	}
 	
 	return {
-		init: function(appNodeId) {
+		init: function(appNodeId, output) {
 			var appNode = document.getElementById(appNodeId);
+			_output = output;
 			
 			// On construit l'élément DOM de l'UI.
-			_appNode = this.builder.buildDomElement();
+			_appNode = this.builder.buildDomElement(_output);
 			
 			// On injecte l'élément DOM de l'UI dans le dom.
 			appendUi(appNode, _appNode);
-			
-			// On initialise les attributs de l'UI à partir du DOM
-			_keyPressedOutput = document.getElementById("output");
+			output.start();
 		},
 		/**
 		 * Attache au body ses écouteurs d'événements.
@@ -32,16 +31,9 @@ keycapp.ui = (function() {
 		 * Affiche la string passé en paramètre au-dessus des string précédemment tapées.
 		 * @param {string} infoString la string afficher à l'utilisateur
 		 */
-		outputKeyPressedInfo: function(infoString) {		
-			// On supprime le prompt de la dernière ligne.
-			var lastLine = _keyPressedOutput.lastChild;
-			var cursorPart = lastLine.firstChild;
-			cursorPart.innerHTML = "";
-			
+		outputKeyPressedInfo: function(infoString) {			
 			// On insère une nouvelle ligne.
-			var infoLine = this.builder.buildOutputLine(infoString);
-			_keyPressedOutput.appendChild(infoLine);
-			infoLine.scrollIntoView();
+			_output.println(infoString);
 		}
 	};
 })();

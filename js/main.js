@@ -1,4 +1,4 @@
-(function(ui, keys) {
+(function(ui, keys, JConsole) {
 
 	/**
 	 * Enregistre les touches tapées et affiche les informations les concernant.
@@ -26,9 +26,9 @@
 	}
 	
 	// On initialise l'interface utilisateur
-	ui.init("keycapp");
+	ui.init("keycapp", new JConsole());
 	
 	// On attache les listeners à L'UI.
 	ui.addBodyListeners(bodyKeydownListener, bodyKeyupListener);
 	
-})(keycapp.ui, keycapp.keys);
+})(keycapp.ui, keycapp.keys, consapp.JConsole);
